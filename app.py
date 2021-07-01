@@ -1,5 +1,12 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+Created on Tue Jun 29 09:05:31 2021
+
+@author: Adm
+"""
+
+#!/usr/bin/env python3
+# -- coding: utf-8 --
 """
 PF008
 
@@ -26,12 +33,17 @@ acoes = clientes['ação']
 all_data =[]
 for atual in listaAcoes:
     all_data.append({ticker: yf.Ticker(ticker) for ticker in atual})
-      
+
 arquivo = open('texto.txt','a')
+iter = 0
 for cliente in all_data:
-    arquivo.write('\n\t'+'Cliente novo')
+    iter += 1
+    arquivo.write('\n\t'+'Cliente ' + str(iter))
     for empresa in cliente:
         arquivo.write('\n\t'+'Empresa nova: ' + empresa)
+        try:
+            arquivo.write('\n\t previousClose: '+ str(cliente[empresa].info['previousClose']))
+        except:
+            print('erro')
 
-arquivo.write('\n\t'+'As informações sobre as ações')
 arquivo.close()
